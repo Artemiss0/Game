@@ -1,0 +1,1 @@
+{"version":3,"file":"main.js","sourceRoot":"","sources":["../dev/crates.ts","../dev/fruit.ts","../dev/game.ts","../dev/gameover.ts","../dev/playgame.ts","../dev/startscreen.ts"],"names":[],"mappings":";AEAA;IACI;QACI,OAAO,CAAC,GAAG,CAAC,UAAU,CAAC,CAAA;IAE3B,CAAC;IACL,WAAC;AAAD,CAAC,AALD,IAKC;AACD,MAAM,CAAC,gBAAgB,CAAC,MAAM,EAAE,cAAM,OAAA,IAAI,IAAI,EAAE,EAAV,CAAU,CAAC,CAAA"}
