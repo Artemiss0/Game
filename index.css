@@ -26,3 +26,26 @@ button{
     cursor: pointer;
     color: #292929;
 }
+crate{
+    background-image:url('components/images/crate.png');
+    width: 180px; height: 107px;
+    background-repeat: no-repeat;
+}
+tree{
+    background-image: url('components/images/tree.png');
+    height: 70.5vh; width: 27em;
+    background-size: cover;
+}
+apple{
+    background-image: url('components/images/apple.png');
+    width: 44px; height: 54px;
+}
+pineapple{
+    background-image: url('components/images/pineapple.png');
+    height: 57px;
+    width: 34px;
+}
+grapes{
+    background-image: url('components/images/grapes.png');
+    height: 57px; width: 52px;
+}
