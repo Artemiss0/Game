@@ -1,0 +1,51 @@
+body {
+    background-color: #70CF51;
+    color:white;
+    font-size:22px;
+    overflow:hidden;
+    margin:0px; padding:0px;
+}
+body * {
+    position: absolute
+
+}
+background {
+    width: 100%; height: 100%;
+    background-image: url("components/images/background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+button{
+    width: auto;
+    height: auto;
+    padding: 20px 150px;
+    background: yellow;
+    text-transform: uppercase;
+    border: none;
+    font-size: 5em;
+    cursor: pointer;
+    color: #292929;
+}
+crate{
+    background-image:url('components/images/crate.png');
+    width: 180px; height: 107px;
+    background-repeat: no-repeat;
+}
+tree{
+    background-image: url('components/images/tree.png');
+    height: 70.5vh; width: 27em;
+    background-size: cover;
+}
+apple{
+    background-image: url('components/images/apple.png');
+    width: 44px; height: 54px;
+}
+pineapple{
+    background-image: url('components/images/pineapple.png');
+    height: 57px;
+    width: 34px;
+}
+grapes{
+    background-image: url('components/images/grapes.png');
+    height: 57px; width: 52px;
+}
