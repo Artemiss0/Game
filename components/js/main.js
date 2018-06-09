@@ -22,6 +22,8 @@ var GameObject = (function () {
         this.y = 0;
         this.element = name;
         this.type = 'type';
+        this.randomX = 0;
+        this.randomY = 0;
     }
     GameObject.prototype.update = function () {
     };
@@ -29,7 +31,11 @@ var GameObject = (function () {
         var tree = document.getElementsByTagName('tree')[0];
         this.element = document.createElement(this.type);
         tree.appendChild(this.element);
-        this.element.style.transform = "translate(" + this.x + "px," + this.y + "px)";
+        this.randomX = Math.floor(Math.random() * tree.clientWidth);
+        this.randomY = Math.floor(Math.random() * tree.clientHeight);
+        this.x = this.randomX;
+        this.y = this.randomY;
+        this.element.style.transform = "translate(" + this.x + "px, " + this.y + "px)";
     };
     return GameObject;
 }());
@@ -40,8 +46,6 @@ var Fruit = (function (_super) {
         _this.apple = new Apple();
         _this.pineapple = new Pineapple();
         _this.grape = new Grape();
-        _this.randomPositionx = Math.floor(Math.random() * window.innerWidth);
-        _this.randomPositiony = Math.floor(Math.random() * window.innerHeight);
         return _this;
     }
     Fruit.prototype.update = function () {
@@ -57,9 +61,7 @@ var Apple = (function (_super) {
     }
     Apple.prototype.addFruit = function () {
         this.type = 'apple';
-        this.x = 5;
-        this.y = 25;
-        return _super.prototype.addFruit.call(this);
+        _super.prototype.addFruit.call(this);
     };
     return Apple;
 }(GameObject));

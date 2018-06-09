@@ -1,22 +1,12 @@
 /// <reference path="gameobject.ts"/>
 
 class Fruit extends GameObject{
-    apple:Apple
-    pineapple:Pineapple
-    grape:Grape
-    randomPositionx:number
-    randomPositiony:number
+    private apple:Apple = new Apple()
+    private pineapple:Pineapple = new Pineapple()
+    private grape:Grape = new Grape()
+
     constructor(){
         super()
-        this.apple = new Apple()
-        this.pineapple = new Pineapple()
-        this.grape = new Grape()
-
-        //random x & y position for fruits
-        this.randomPositionx = Math.floor(Math.random() * window.innerWidth)
-        this.randomPositiony = Math.floor(Math.random() * window.innerHeight)
-
-
     }
     update(){
     }
@@ -29,9 +19,7 @@ class Apple extends GameObject{
     }
     addFruit(){
         this.type = 'apple'
-        this.x = 5
-        this.y = 25
-        return super.addFruit()
+        super.addFruit()
     }
 }
 //adding pineapple
