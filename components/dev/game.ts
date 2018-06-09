@@ -1,8 +1,9 @@
 class Game {
-    private s:StartScreen
+    private startscreen:StartScreen
     
     constructor(){
-        this.s = new StartScreen(this)
+        this.startscreen = new StartScreen(this)
+    
         this.gameloop()
     }
     private gameloop(){
@@ -11,6 +12,8 @@ class Game {
 
     public PlayGame(){
         new PlayGame(this)
+        this.startscreen.removeButton()
+     
     }
 }
 window.addEventListener("load", () => new Game())

@@ -1,0 +1,8 @@
+class Crate {
+    
+    constructor(){
+    }
+    update(){
+        
+    }
+}

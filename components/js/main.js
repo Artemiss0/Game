@@ -1,29 +1,97 @@
 "use strict";
-var Crates = (function () {
-    function Crates() {
-        this.center = window.innerWidth / 2;
-        this.x = [this.center - 200, this.center, this.center + 200];
-        this.y = window.innerHeight / 2 + 300;
-        for (var i = 0; i < 3; i++) {
-            var crate = void 0;
-            crate = document.createElement('crate');
-            document.body.appendChild(crate);
-            crate.style.transform = "translate(" + this.x[i] + "px, " + this.y + "px)";
-        }
-    }
-    Crates.prototype.update = function () {
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
-    return Crates;
-}());
-var Fruit = (function () {
-    function Fruit() {
-        this.type = "apple";
+})();
+var Crate = (function () {
+    function Crate() {
     }
-    return Fruit;
+    Crate.prototype.update = function () {
+    };
+    return Crate;
 }());
+var GameObject = (function () {
+    function GameObject() {
+        this.x = 0;
+        this.y = 0;
+        this.element = name;
+        this.type = 'type';
+    }
+    GameObject.prototype.update = function () {
+    };
+    GameObject.prototype.addFruit = function () {
+        var tree = document.getElementsByTagName('tree')[0];
+        this.element = document.createElement(this.type);
+        tree.appendChild(this.element);
+        this.element.style.transform = "translate(" + this.x + "px," + this.y + "px)";
+    };
+    return GameObject;
+}());
+var Fruit = (function (_super) {
+    __extends(Fruit, _super);
+    function Fruit() {
+        var _this = _super.call(this) || this;
+        _this.apple = new Apple();
+        _this.pineapple = new Pineapple();
+        _this.grape = new Grape();
+        _this.randomPositionx = Math.floor(Math.random() * window.innerWidth);
+        _this.randomPositiony = Math.floor(Math.random() * window.innerHeight);
+        return _this;
+    }
+    Fruit.prototype.update = function () {
+    };
+    return Fruit;
+}(GameObject));
+var Apple = (function (_super) {
+    __extends(Apple, _super);
+    function Apple() {
+        var _this = _super.call(this) || this;
+        _this.addFruit();
+        return _this;
+    }
+    Apple.prototype.addFruit = function () {
+        this.type = 'apple';
+        this.x = 5;
+        this.y = 25;
+        return _super.prototype.addFruit.call(this);
+    };
+    return Apple;
+}(GameObject));
+var Pineapple = (function (_super) {
+    __extends(Pineapple, _super);
+    function Pineapple() {
+        var _this = _super.call(this) || this;
+        _this.addFruit();
+        return _this;
+    }
+    Pineapple.prototype.addFruit = function () {
+        this.type = 'pineapple';
+        _super.prototype.addFruit.call(this);
+    };
+    return Pineapple;
+}(GameObject));
+var Grape = (function (_super) {
+    __extends(Grape, _super);
+    function Grape() {
+        var _this = _super.call(this) || this;
+        _this.addFruit();
+        return _this;
+    }
+    Grape.prototype.addFruit = function () {
+        this.type = 'grape';
+        _super.prototype.addFruit.call(this);
+    };
+    return Grape;
+}(GameObject));
 var Game = (function () {
     function Game() {
-        this.s = new StartScreen(this);
+        this.startscreen = new StartScreen(this);
         this.gameloop();
     }
     Game.prototype.gameloop = function () {
@@ -32,51 +100,51 @@ var Game = (function () {
     };
     Game.prototype.PlayGame = function () {
         new PlayGame(this);
+        this.startscreen.removeButton();
     };
     return Game;
 }());
 window.addEventListener("load", function () { return new Game(); });
 var PlayGame = (function () {
     function PlayGame(g) {
-        this.button = document.getElementsByTagName("button")[0];
-        this.button.style.display = "none";
         this.game = g;
-        this.crate = new Crates();
         this.tree = new Tree();
+        this.fruit = new Fruit();
     }
     return PlayGame;
 }());
-var StartScreen = (function () {
+var StartScreen = (function (_super) {
+    __extends(StartScreen, _super);
     function StartScreen(g) {
-        var _this = this;
-        this.game = g;
-        this.button = document.createElement("button");
-        document.body.appendChild(this.button);
-        this.button.innerHTML = 'start';
-        this.x = (window.innerWidth - this.button.clientWidth) / 2;
-        this.y = (window.innerHeight - this.button.clientHeight) / 2;
-        this.button.style.transform = "translate(" + this.x + "px, " + this.y + "px)";
-        this.button.addEventListener("click", function () { return _this.game.PlayGame(); });
+        var _this = _super.call(this) || this;
+        _this.game = g;
+        _this.button = document.createElement("button");
+        document.body.appendChild(_this.button);
+        _this.button.innerHTML = 'start';
+        _this.x = (window.innerWidth - _this.button.clientWidth) / 2;
+        _this.y = (window.innerHeight - _this.button.clientHeight) / 2;
+        _this.button.style.transform = "translate(" + _this.x + "px, " + _this.y + "px)";
+        _this.button.addEventListener("click", function () { return _this.game.PlayGame(); });
+        return _this;
     }
-    StartScreen.prototype.update = function () {
+    StartScreen.prototype.removeButton = function () {
+        this.button.remove();
     };
     return StartScreen;
-}());
-var Tree = (function () {
+}(GameObject));
+var Tree = (function (_super) {
+    __extends(Tree, _super);
     function Tree() {
-        this.fruits = [];
-        this.tree = document.createElement('tree');
-        document.body.appendChild(this.tree);
-        this.x = (window.innerWidth - this.tree.clientWidth) / 2;
-        this.y = (window.innerHeight - this.tree.clientHeight) / 4;
-        this.tree.style.transform = "translate(" + this.x + "px, " + this.y + "px)";
-        for (var i = 0; i < 3; i++) {
-            this.fruits.push(new Fruit());
-            console.log(this.fruits);
-        }
+        var _this = _super.call(this) || this;
+        _this.tree = document.createElement('tree');
+        document.body.appendChild(_this.tree);
+        _this.x = (window.innerWidth - _this.tree.clientWidth) / 2;
+        _this.y = (window.innerHeight - _this.tree.clientHeight) / 4;
+        _this.tree.style.transform = "translate(" + _this.x + "px, " + _this.y + "px)";
+        return _this;
     }
     Tree.prototype.update = function () {
     };
     return Tree;
-}());
+}(GameObject));
 //# sourceMappingURL=main.js.map
