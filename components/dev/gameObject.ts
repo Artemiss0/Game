@@ -3,18 +3,29 @@ class GameObject {
     protected y:number = 0
     protected element:HTMLElement = name
     protected type:string = 'type'
-    constructor(){
+    protected randomX:number = 0
+    protected randomY:number = 0
 
+    // protected fruits
+    constructor(){
+     
     }
     update(){
 
     }
-    addFruit(){
+    protected addFruit() :void{
         let tree = document.getElementsByTagName('tree')[0]
     
         this.element = document.createElement(this.type)
         tree.appendChild(this.element)
 
-        this.element.style.transform = `translate(${this.x}px,${this.y}px)`
+        this.randomX = Math.floor(Math.random() * tree.clientWidth);
+        this.randomY = Math.floor(Math.random() * tree.clientHeight);
+
+        this.x = this.randomX
+        this.y = this.randomY
+
+        this.element.style.transform = `translate(${this.x}px, ${this.y}px)`
     }
+
 }
