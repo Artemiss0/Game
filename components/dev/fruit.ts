@@ -1,12 +1,11 @@
 /// <reference path="gameobject.ts"/>
 
 class Fruit extends GameObject{
-    private apple:Apple = new Apple()
-    private pineapple:Pineapple = new Pineapple()
-    private grape:Grape = new Grape()
-
     constructor(){
         super()
+        new Apple()
+        new Pineapple()
+        new Grape()
     }
     update(){
     }

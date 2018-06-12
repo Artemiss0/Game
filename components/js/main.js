@@ -9,13 +9,6 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var Crate = (function () {
-    function Crate() {
-    }
-    Crate.prototype.update = function () {
-    };
-    return Crate;
-}());
 var GameObject = (function () {
     function GameObject() {
         this.x = 0;
@@ -24,10 +17,18 @@ var GameObject = (function () {
         this.type = 'type';
         this.randomX = 0;
         this.randomY = 0;
+        this.offSetX = 0;
+        this.offSetY = 0;
     }
     GameObject.prototype.update = function () {
     };
+    GameObject.prototype.createCrate = function () {
+        this.element = document.createElement(this.type);
+        document.body.appendChild(this.element);
+        this.element.style.transform = "translate(" + this.x + "px, " + this.y + "px)";
+    };
     GameObject.prototype.addFruit = function () {
+        var _this = this;
         var tree = document.getElementsByTagName('tree')[0];
         this.element = document.createElement(this.type);
         tree.appendChild(this.element);
@@ -36,16 +37,93 @@ var GameObject = (function () {
         this.x = this.randomX;
         this.y = this.randomY;
         this.element.style.transform = "translate(" + this.x + "px, " + this.y + "px)";
+        this.moveBind = function (e) { return _this.updatePosition(e); };
+        this.element.addEventListener("mousedown", function (e) { return _this.initDrag(e); });
+        this.element.addEventListener("mouseup", function (e) { return _this.initStopDrag(e); });
+    };
+    GameObject.prototype.initDrag = function (e) {
+        e.preventDefault();
+        this.offSetX = e.clientX - this.x;
+        this.offSetY = e.clientY - this.y;
+        window.addEventListener("mousemove", this.moveBind);
+    };
+    GameObject.prototype.updatePosition = function (e) {
+        e.preventDefault();
+        this.x = e.clientX - this.offSetX;
+        this.y = e.clientY - this.offSetY;
+        this.element.style.transform = "translate(" + this.x + "px, " + this.y + "px)";
+    };
+    GameObject.prototype.initStopDrag = function (e) {
+        window.removeEventListener("mousemove", this.moveBind);
+        e.preventDefault();
     };
     return GameObject;
 }());
+var Crate = (function (_super) {
+    __extends(Crate, _super);
+    function Crate() {
+        var _this = _super.call(this) || this;
+        new AppleCrate();
+        new PineappleCrate();
+        new GrapeCrate();
+        return _this;
+    }
+    Crate.prototype.update = function () {
+    };
+    return Crate;
+}(GameObject));
+var AppleCrate = (function (_super) {
+    __extends(AppleCrate, _super);
+    function AppleCrate() {
+        var _this = _super.call(this) || this;
+        _this.createCrate();
+        return _this;
+    }
+    AppleCrate.prototype.createCrate = function () {
+        this.type = 'appleCrate';
+        this.x = (window.innerWidth - 180) / 2;
+        this.y = (window.innerHeight / 2) + 250;
+        _super.prototype.createCrate.call(this);
+    };
+    return AppleCrate;
+}(GameObject));
+var PineappleCrate = (function (_super) {
+    __extends(PineappleCrate, _super);
+    function PineappleCrate() {
+        var _this = _super.call(this) || this;
+        _this.createCrate();
+        return _this;
+    }
+    PineappleCrate.prototype.createCrate = function () {
+        this.type = 'pineappleCrate';
+        this.x = (window.innerWidth - 180) / 2 - 200;
+        this.y = (window.innerHeight / 2) + 250;
+        _super.prototype.createCrate.call(this);
+    };
+    return PineappleCrate;
+}(GameObject));
+var GrapeCrate = (function (_super) {
+    __extends(GrapeCrate, _super);
+    function GrapeCrate() {
+        var _this = _super.call(this) || this;
+        _this.createCrate();
+        return _this;
+    }
+    GrapeCrate.prototype.createCrate = function () {
+        this.type = 'grapeCrate';
+        this.x = (window.innerWidth - 180) / 2 + 200;
+        this.y = (window.innerHeight / 2) + 250;
+        _super.prototype.createCrate.call(this);
+    };
+    return GrapeCrate;
+}(GameObject));
 var Fruit = (function (_super) {
     __extends(Fruit, _super);
     function Fruit() {
         var _this = _super.call(this) || this;
-        _this.apple = new Apple();
-        _this.pineapple = new Pineapple();
-        _this.grape = new Grape();
+        new Apple();
+        new Pineapple();
+        new Grape();
         return _this;
     }
     Fruit.prototype.update = function () {
@@ -109,9 +187,11 @@ var Game = (function () {
 window.addEventListener("load", function () { return new Game(); });
 var PlayGame = (function () {
     function PlayGame(g) {
+        this.crate = new Crate();
         this.game = g;
-        this.tree = new Tree();
-        this.fruit = new Fruit();
+        new Tree();
+        new Fruit();
+        console.log(this.crate);
     }
     return PlayGame;
 }());
