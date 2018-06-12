@@ -1,11 +1,11 @@
 class PlayGame{
     private game:Game
-    private tree:Tree
-    private fruit:Fruit
+    private crate:Crate = new Crate()
 
     constructor(g:Game){
         this.game = g
-        this.tree = new Tree()
-        this.fruit = new Fruit()
+        new Tree()
+        new Fruit()
+        console.log(this.crate)
 }
 }

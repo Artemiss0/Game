@@ -29,7 +29,6 @@ button{
 crate{
     background-image:url('components/images/crate.png');
     width: 180px; height: 107px;
-    background-repeat: no-repeat;
 }
 tree{
     background-image: url('components/images/tree.png');
@@ -40,12 +39,24 @@ apple{
     background-image: url('components/images/apple.png');
     width: 44px; height: 54px;
 }
+applecrate{
+    background-image: url('components/images/crate.png');
+    width: 180px; height: 107px;
+}
 pineapple{
     background-image: url('components/images/pineapple.png');
     height: 57px;
     width: 34px;
 }
+pineapplecrate{
+    background-image: url('components/images/crate.png');
+    width: 180px; height: 107px;
+}
 grape{
     background-image: url('components/images/grapes.png');
     height: 57px; width: 52px;
+}
+grapecrate{
+    background-image: url('components/images/crate.png');
+    width: 180px; height: 107px;
 }
